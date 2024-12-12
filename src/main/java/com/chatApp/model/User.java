@@ -30,6 +30,8 @@ public class User {
     @Column
     private String encryptedPass;
 
+    @Setter
+    @Getter
     @OneToMany(mappedBy = "sender")
     private List<Message> sentMessages;
 
