@@ -28,7 +28,7 @@ public class User {
     @Getter
     @Setter
     @Column
-    private String encryptedPass;
+    private String password;
 
     @Setter
     @Getter
