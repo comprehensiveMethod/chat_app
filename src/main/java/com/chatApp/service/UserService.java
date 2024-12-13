@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public User registerUser(User user) {
-        if (userRepository.existsByUsername(user.getLogin())) {
+        if (userRepository.existsByLogin(user.getLogin())) {
             throw new IllegalArgumentException("Username already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));

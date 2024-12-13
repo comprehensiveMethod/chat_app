@@ -23,19 +23,21 @@ public class SecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .mvcMatchers("/login", "/register").permitAll() // Доступ для всех
-                .anyRequest().authenticated() // Остальные запросы требуют авторизации
+                .mvcMatchers("/login", "/register").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login") // Кастомная страница логина
-                .defaultSuccessUrl("/chats", true) // Куда перенаправлять после успешного входа
+                .loginPage("/login")
+                .usernameParameter("login")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/chats", true)
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout") // Куда перенаправлять после выхода
-                .invalidateHttpSession(true) // Инвалидация сессии
-                .deleteCookies("JSESSIONID") // Удаление куки
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .permitAll();
         return httpSecurity.build();
     }

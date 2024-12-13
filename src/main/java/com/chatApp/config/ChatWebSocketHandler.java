@@ -22,7 +22,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception{
         String username = session.getPrincipal().getName();
-        User user = userRepository.findByUsername(username).orElseThrow();
+        User user = userRepository.findByLogin(username).orElseThrow();
         activeSessions.put(user.getId(), session);
     }
     @Override
@@ -33,7 +33,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         String messageText = messageParts[1];
 
         Chat chat = chatRepository.findById(chatId).orElseThrow();
-        User sender = userRepository.findByUsername(session.getPrincipal().getName()).orElseThrow();
+        User sender = userRepository.findByLogin(session.getPrincipal().getName()).orElseThrow();
 
         Message newMsg = new Message();
         newMsg.setChat(chat);
@@ -53,7 +53,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         String username = session.getPrincipal().getName();
-        User user = userRepository.findByUsername(username).orElseThrow();
+        User user = userRepository.findByLogin(username).orElseThrow();
         activeSessions.remove(user.getId());
     }
 }
