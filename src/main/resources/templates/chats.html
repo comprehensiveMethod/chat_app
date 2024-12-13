@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chats</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Welcome to the Chat Application</h1>
+    <p th:text="'Hello, ' + ${login} + '!'" class="welcome-message"></p>
+</header>
+
+<main>
+    <section class="chat-list">
+        <h2>Your Chats</h2>
+
+        <p>No chats available yet. Start a new conversation!</p>
+    </section>
+</main>
+
+<footer>
+    <a th:href="@{/logout}">Logout</a>
+</footer>
+</body>
+</html>

@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    private final UserService userService;
     private final AuthenticationManager authenticationManager;
     public LoginController(UserService userService, AuthenticationManager authenticationManager){
-        this.userService = userService;
         this.authenticationManager = authenticationManager;
     }
     @GetMapping
-    public String showLoginPage(){
+    public String showLoginPage(Model model){
+        model.addAttribute("user",new User());
         return "login";
     }
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
+
+    @PostMapping
+    public String login(@ModelAttribute User user, Model model) {
         UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(username, password);
+                new UsernamePasswordAuthenticationToken(user.getLogin(), user.getPassword());
 
         Authentication authentication = authenticationManager.authenticate(authToken);
 

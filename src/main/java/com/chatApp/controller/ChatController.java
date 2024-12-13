@@ -16,11 +16,12 @@ public class ChatController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
-            model.addAttribute("username", username);
+            String login = ((UserDetails) principal).getUsername();
+            model.addAttribute("login", login);
         } else {
             model.addAttribute("username", "Гость");
         }
         return "chats";
     }
+
 }

@@ -14,12 +14,13 @@ public class RegController {
         this.userService = userService;
     }
 
-    @GetMapping("/register")
-    public String showRegistrationPage() {
+    @GetMapping
+    public String showRegistrationPage(Model model) {
+        model.addAttribute("user", new User());
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public String registerUser(@ModelAttribute User user, Model model) {
         userService.registerUser(user);
         model.addAttribute("message", "Регистрация успешна");
