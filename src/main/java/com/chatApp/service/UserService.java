@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -35,5 +36,15 @@ public class UserService {
 
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+    }
+    public Optional<User> findUserByLogin(String login){
+        return userRepository.findByLogin(login);
+    }
+
+    @Transactional
+    public User findUserWithChats(String login) {
+        User user = userRepository.findByLogin(login).orElseThrow();
+        user.getChats().size();
+        return user;
     }
 }
