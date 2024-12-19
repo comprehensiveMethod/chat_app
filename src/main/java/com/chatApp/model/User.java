@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Getter
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
@@ -36,6 +36,8 @@ public class User {
     private List<Message> sentMessages;
 
     @ManyToMany
+    @Getter
+    @Setter
     @JoinTable(
             name = "chat_users",
             joinColumns = @JoinColumn(name = "user_id"),

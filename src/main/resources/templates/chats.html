@@ -13,13 +13,18 @@
 
 <main>
     <section class="chat-list">
-        <h2>Your Chats</h2>
-
-        <p>No chats available yet. Start a new conversation!</p>
+        <h2>Ваши чаты:</h2>
+        <ul>
+            <li th:each="chat : ${chats}">
+                <a th:href="@{/chat/{id}(id=${chat.id})}" th:text="${chat.name}"></a>
+            </li>
+        </ul>
+        <p th:if="${noChatsMessage != null}" th:text="${noChatsMessage}"></p>
     </section>
 </main>
 
 <footer>
+    <a th:href="@{/create_chat}">Создать чат</a>
     <a th:href="@{/logout}">Logout</a>
 </footer>
 </body>
